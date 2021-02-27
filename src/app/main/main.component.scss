@@ -1,0 +1,12 @@
+.main {
+    &__toolbar {
+        background-color: rgb(51, 51, 51);
+        color: #fff;
+    }
+}
+
+.img-logo {
+    width: 100px;
+    border-radius: 10px;
+    filter: brightness(50000%);
+}

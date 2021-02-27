@@ -1,0 +1,28 @@
+<div class="login-container" fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="login-form">
+        <div>
+            <img src="../../assets/img/logo.png" alt="" style="margin-bottom: 16px; width: 100%;">
+            <form [formGroup]="dataFormGroup">
+                <mat-form-field fxFlex="100" style="margin-bottom: 16px;" appearance="outline" style="display:block">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput type="text" formControlName="email" placeholder="Correo electrónico"
+                        autocomplete="off">
+                </mat-form-field>
+
+                <mat-form-field fxFlex="100" style="margin-bottom: 16px;" appearance="outline" style="display:block">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="pass" placeholder="***"
+                        autocomplete="off">
+                    <button mat-icon-button matSuffix (click)="hidePass = !hidePass"
+                        [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hidePass">
+                        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </form>
+            <button fxFlex="100" color="primary" mat-raised-button (click)="login()">
+                Ingresar
+            </button>
+        </div>
+    </div>
+
+</div>

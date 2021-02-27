@@ -1,0 +1,14 @@
+<div>
+    <mat-toolbar class="main__toolbar">
+        <a class="img-logo main__logo" routerLink="/main">
+            <img src="../../assets/img/logo.png" class="main__logoimage" alt="logo">
+        </a>
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-icon-button >
+            <mat-icon class="dark-icon">menu</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="main__space">
+        <router-outlet></router-outlet>
+    </div>
+</div>
