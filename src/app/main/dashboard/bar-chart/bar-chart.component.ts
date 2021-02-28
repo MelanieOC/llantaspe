@@ -1,105 +1,44 @@
-import { Component, Inject, NgZone, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
-// amCharts imports
-import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent {
-  private chart: am4charts.XYChart;
+export class BarChartComponent implements OnInit {
+  
+  xAxisLabel: string;
+  yAxisLabel: string;
 
-  constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
-
-  // Run the function only in the browser
-  browserOnly(f: () => void) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.zone.runOutsideAngular(() => {
-        f();
-      });
-    }
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = false;
+  showYAxisLabel = false;
+  colorScheme = {
+    domain: ['#B0E5ED', '#02704B', '#FE6D34', '#1A1AB5', '#FFD731']
   }
 
-  ngAfterViewInit() {
-    // Chart code goes in here
-    this.browserOnly(() => {
-      let chart = am4core.create("barchartdiv", am4charts.XYChart);
-      am4core.useTheme(am4themes_animated);
-      chart.data = [{
-        "country": "Lithuania",
-        "litres": 501.9,
-        "units": 250
-      }, {
-        "country": "Czech Republic",
-        "litres": 301.9,
-        "units": 222
-      }, {
-        "country": "Ireland",
-        "litres": 201.1,
-        "units": 170
-      }, {
-        "country": "Germany",
-        "litres": 165.8,
-        "units": 122
-      }, {
-        "country": "Australia",
-        "litres": 139.9,
-        "units": 99
-      }, {
-        "country": "Austria",
-        "litres": 128.3,
-        "units": 85
-      }, {
-        "country": "UK",
-        "litres": 99,
-        "units": 93
-      }, {
-        "country": "Belgium",
-        "litres": 60,
-        "units": 50
-      }, {
-        "country": "The Netherlands",
-        "litres": 50,
-        "units": 42
-      }];
+  data = [
+    { name: "190.117.120.249", value: 91 },
+    { name: "186.188.242.43", value: 38 },
+    { name: "34.95.130.28", value: 36 },
+    { name: "170.231.82.34", value: 28 },
+    { name: "45.5.69.234", value: 24 },
+    { name: "201.240.145.41", value: 20 },
+    { name: "179.43.94.94", value: 18 },
+    { name: "143.255.56.90", value: 16 },
+    { name: "200.62.167.162", value: 14 },
+    { name: "45.5.68.12", value: 14 }
+  ]
 
-      // Create axes
-      let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-      categoryAxis.dataFields.category = "country";
-      categoryAxis.title.text = "Countries";
+  constructor() { }
 
-      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis.title.text = "Litres sold (M)";
-
-      // Create series
-      let series = chart.series.push(new am4charts.ColumnSeries());
-      series.dataFields.valueY = "litres";
-      series.dataFields.categoryX = "country";
-      series.name = "Sales";
-      series.columns.template.tooltipText = "Series: {name}\nCategory: {categoryX}\nValue: {valueY}";
-      series.columns.template.fill = am4core.color("#104547"); // fill
-
-      var series2 = chart.series.push(new am4charts.LineSeries());
-      series2.name = "Units";
-      series2.stroke = am4core.color("#CDA2AB");
-      series2.strokeWidth = 3;
-      series2.dataFields.valueY = "units";
-      series2.dataFields.categoryX = "country";
-    });
+  ngOnInit(): void {
   }
 
-  ngOnDestroy() {
-    // Clean up chart when the component is removed
-    this.browserOnly(() => {
-      if (this.chart) {
-        this.chart.dispose();
-      }
-    });
+  onSelect(event) {
+    console.log(event);
   }
-
 }

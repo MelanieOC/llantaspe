@@ -1,79 +1,50 @@
-import { Component, Inject, NgZone, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
-// amCharts imports
-import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss']
 })
-export class PieChartComponent {
+export class PieChartComponent implements OnInit {
+  showLegend = true;
+  gradient = true;
+  colorScheme = {
+    domain: ['#B0E5ED', '#02704B', '#FE6D34', '#1A1AB5', '#FFD731']
+  };
+  showLabels = true;
+  explodeSlices = false;
+  doughnut = false;
 
-  private chart: am4charts.XYChart;
+  data = [
+    { name: "185/70/14", value: 151 },
+    { name: "205/55/16", value: 128 },
+    { name: "225/65/17", value: 120 },
+    { name: "195/65/15", value: 113 },
+    { name: "185/65/15", value: 105 },
+    { name: "265/65/17", value: 86 },
+    { name: "225/60/17", value: 81 },
+    { name: "175/70/14", value: 80 },
+    { name: "185/70/13", value: 73 },
+    { name: "265/70/16", value: 72 },
+    { name: "205/60/15", value: 69 },
+    { name: "235/65/17", value: 65 },
+    { name: "215/65/16", value: 58 },
+    { name: "205/60/15", value: 58 },
+    { name: "215/60/17", value: 54 },
+    { name: "235/55/18", value: 52 },
+    { name: "265/70/17", value: 49 },
+    { name: "185/65/14", value: 48 },
+    { name: "215/50/17", value: 46 },
+    { name: "225/45/17", value: 44 },
+    { name: "Otros", value: 2574 }
+  ]
+  constructor() { }
 
-  constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
-
-  // Run the function only in the browser
-  browserOnly(f: () => void) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.zone.runOutsideAngular(() => {
-        f();
-      });
-    }
+  ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-    // Chart code goes in here
-    this.browserOnly(() => {
-      am4core.useTheme(am4themes_animated);
-
-      let chart = am4core.create("chartdiv", am4charts.PieChart);
-
-      chart.data = [{
-        "country": "Lithuania",
-        "litres": 501.9
-      }, {
-        "country": "Czech Republic",
-        "litres": 301.9
-      }, {
-        "country": "Ireland",
-        "litres": 201.1
-      }, {
-        "country": "Germany",
-        "litres": 165.8
-      }, {
-        "country": "Australia",
-        "litres": 139.9
-      }, {
-        "country": "Austria",
-        "litres": 128.3
-      }, {
-        "country": "UK",
-        "litres": 99
-      }, {
-        "country": "Belgium",
-        "litres": 60
-      }, {
-        "country": "The Netherlands",
-        "litres": 50
-      }];
-      let pieSeries = chart.series.push(new am4charts.PieSeries());
-      pieSeries.dataFields.value = "litres";
-      pieSeries.dataFields.category = "country";
-    });
-  }
-
-  ngOnDestroy() {
-    // Clean up chart when the component is removed
-    this.browserOnly(() => {
-      if (this.chart) {
-        this.chart.dispose();
-      }
-    });
+  onSelect(event) {
+    console.log(event);
   }
 
 }

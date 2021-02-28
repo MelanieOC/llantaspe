@@ -1,50 +1,73 @@
 <div>
+    <div class="pl-xs pr-xs" style="margin: 16px 0;">
+        <div class="view" style="padding: 10px;">
+            <mat-form-field>
+                <mat-label>Desde - Hasta</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input readonly matStartDate placeholder="dd/mm/aaaa">
+                    <input readonly matEndDate placeholder="dd/mm/aaaa">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </div>
+    </div>
     <div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-bottom: 16px;">
-
         <div class="pl-xs pr-xs" fxFlex="100">
-            <div class="title">
-                Las 20 medidas más consultadas en llantas.pe
-            </div>
-            <div>
-                <app-pie-chart></app-pie-chart>
+            <div class="view">
+                <div class="title">
+                    Las 20 medidas más consultadas en llantas.pe
+                </div>
+                <div style="padding: 10px;">
+                    <app-pie-chart></app-pie-chart>
+                </div>
             </div>
         </div>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-bottom: 16px;">
 
         <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="title">
-                Las 10 Ips que más consultan en llantas.pe
+            <div class="view">
+                <div class="title">
+                    Las 10 Ips que más consultan en llantas.pe
+                </div>
+                <div style="padding: 10px;">
+                    <app-bar-chart></app-bar-chart>
+                </div>
             </div>
-            <div>
-                <app-bar-chart></app-bar-chart>
-            </div>
+            
         </div>
         <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="title">
-                Ranking de paises que más consultan en llantas.pe
-            </div>
-            <div>
-                <app-bar-chart></app-bar-chart>
+            <div class="view"> 
+                <div class="title">
+                    Ranking de paises que más consultan en llantas.pe
+                </div>
+                <div style="padding: 10px;">
+                    <app-country-chart></app-country-chart>
+                </div>
             </div>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div fxLayout="row wrap " fxLayoutAlign="center center" style="margin-bottom: 16px;">
 
         <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="title">
-                Dispositivos más usados
-            </div>
-            <div>
-                <app-media-chart></app-media-chart>
+            <div class="view">
+                <div class="title">
+                    Dispositivos más usados
+                </div>
+                <div style="padding: 10px;">
+                    <app-media-chart></app-media-chart>
+                </div>
             </div>
         </div>
         <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="title">
-                Medidas buscadas por los usuarios
-            </div>
-            <div>
-                <app-words-chart></app-words-chart>
+            <div class="view">
+                <div class="title">
+                    Medidas buscadas por los usuarios
+                </div>
+                <div style="padding: 10px;">
+                    <app-words-chart></app-words-chart>
+                </div>
             </div>
         </div>
     </div>

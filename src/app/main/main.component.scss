@@ -3,10 +3,22 @@
         background-color: rgb(51, 51, 51);
         color: #fff;
     }
+    &__space{
+        overflow: auto;
+        height: calc(100vh - 64px);
+    }
 }
 
 .img-logo {
     width: 100px;
     border-radius: 10px;
     filter: brightness(50000%);
+}
+
+@media(max-width:599px){
+    .main {
+        &__space{
+            height: calc(100vh - 56px);
+        }
+    }
 }

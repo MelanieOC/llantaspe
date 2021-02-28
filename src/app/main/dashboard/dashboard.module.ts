@@ -14,16 +14,26 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CountryChartComponent } from './country-chart/country-chart.component';
-import { WordsChartComponent } from './words-chart/words-chart.component';
 import { MediaChartComponent } from './media-chart/media-chart.component';
+import { WordsChartComponent } from './words-chart/words-chart.component';
+
 
 
 @NgModule({
-  declarations: [DashboardComponent, PieChartComponent, BarChartComponent, CountryChartComponent, WordsChartComponent, MediaChartComponent],
+  declarations: [
+    DashboardComponent,
+    PieChartComponent,
+    BarChartComponent,
+    CountryChartComponent,
+    MediaChartComponent,
+    WordsChartComponent
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -36,7 +46,10 @@ import { MediaChartComponent } from './media-chart/media-chart.component';
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxChartsModule
   ]
 })
 export class DashboardModule { }
