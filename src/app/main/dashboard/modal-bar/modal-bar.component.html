@@ -1,0 +1,15 @@
+<div mat-dialog-title>
+    <div fxLayout="row" fxLayoutAlign="space-between none" style="align-items: baseline;">
+        <h3 style="font-size: 16px;">IP: {{data.data.name}}</h3>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-progress-bar mode="indeterminate" *ngIf="loader"></mat-progress-bar>
+</div>
+<mat-dialog-content>
+    <div *ngIf="!loader">
+        <app-table-responsive [data]="dataSource" [columns]="columns"></app-table-responsive>
+    </div>
+</mat-dialog-content>

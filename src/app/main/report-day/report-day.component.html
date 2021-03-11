@@ -1,0 +1,44 @@
+<div>
+    <mat-toolbar>
+        <mat-toolbar-row class="container" fxLayout="row" fxLayoutAlign="space-between center">
+            <h2>Reporte Diario</h2>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" *ngIf="loader"></mat-progress-bar>
+
+    <div class="container">
+        <div style="margin-bottom: 16px;">
+            <div fxLayout="row wrap" fxLayoutAlign="start end">
+
+                <mat-form-field class="pl-xs pr-xs" fxFlex="40">
+                    <input matInput [formControl]="dateForm" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="pl-xs pr-xs" fxFlex="40" fxFlex.gt-sm="20" style="margin-left: 16px;">
+                    <button mat-raised-button color="primary" [disabled]="formSubmitAttempt" type="button"
+                        style="margin-bottom: 16px;" (click)="onSubmit()">
+                        Buscar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div *ngIf="!loader">
+            <div *ngIf="data.length;else noData">
+                <div style="margin-bottom: 16px;">
+                    <div echarts [options]="chartOption" class="h-300px"></div>
+                </div>
+                <app-table-responsive [data]="data" [columns]="columns"></app-table-responsive>
+            </div>
+            <ng-template #noData>
+                <mat-card>
+                    <mat-card-content>
+                        <div style="text-align: center;">Sin Resultados</div>
+                    </mat-card-content>
+                </mat-card>
+            </ng-template>
+        </div>
+
+    </div>
+</div>

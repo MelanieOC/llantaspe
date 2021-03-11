@@ -2,15 +2,20 @@
     background-color: rgb(51, 51, 51);
     color: #fff;
     padding: 16px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
 }
 
 .view {
-    border-radius: 10px;
-    border: 1px solid gray;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    margin-bottom: 16px;
+    position: relative;
 }
 
+.pad{
+    padding: 16px 5px;
+}
 .pl-xs {
     padding-left: 10px;
 }

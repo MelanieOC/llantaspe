@@ -19,7 +19,8 @@
                     </button>
                 </mat-form-field>
             </form>
-            <button style="width:100%;" color="primary" mat-raised-button (click)="login()">
+            <mat-progress-bar mode="indeterminate" *ngIf="load"></mat-progress-bar>
+            <button style="width:100%;" color="primary" [disabled]="dataFormGroup.invalid || load" mat-raised-button (click)="login()">
                 Ingresar
             </button>
         </div>

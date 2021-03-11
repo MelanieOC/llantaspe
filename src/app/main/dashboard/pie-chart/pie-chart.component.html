@@ -1,6 +1,12 @@
-<div class="w-100 h-300px">
-    <ngx-charts-pie-chart [scheme]="colorScheme" [results]="data" [legend]="showLegend" legendPosition="below"
-        [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient"
+<!--div class="w-100 h-300px">
+    <ngx-charts-pie-chart scheme="cool" [results]="data" [legend]="showLegend" legendPosition="below"
+        [explodeSlices]="explodeSlices" [activeEntries]="active" [tooltipDisabled]="!(mediaService.match$ | async)" [labels]="mediaService.match$ | async" [doughnut]="doughnut" [gradient]="gradient"
         (select)="onSelect($event)">
     </ngx-charts-pie-chart>
-</div>
+</div-->
+<div echarts [options]="chartOption" class="h-300px"></div>
+<!--div class="chart">
+    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+         [legend]="pieChartLegend">
+    </canvas>
+</div-->

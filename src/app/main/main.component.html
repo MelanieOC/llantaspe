@@ -1,14 +1,35 @@
-<div style="height: 100vh;">
-    <mat-toolbar class="main__toolbar">
-        <a class=" main__logo" routerLink="/main">
+<mat-toolbar class="main__toolbar mat-elevation-z6">
+    <mat-toolbar-row>
+        <a class=" main__logo" routerLink="/main" style="display: flex; align-items: center;">
             <img src="../../assets/img/logo.png" class="img-logo" alt="logo">
         </a>
+        <a class="main__link" mat-button fxHide fxShow.gt-xs routerLink="/main/reporteIp" routerLinkActive="nav-active">
+            Reporte X IP
+        </a>
+        <a class="main__link" mat-button fxHide fxShow.gt-xs routerLink="/main/reporte_dia"
+            routerLinkActive="nav-active">
+            Reporte diario
+        </a>
+        <a class="main__link" mat-button fxHide fxShow.gt-xs routerLink="/main/reporte_mes"
+            routerLinkActive="nav-active">
+            Reporte Mensual
+        </a>
         <span style="flex: 1 1 auto;"></span>
-        <button mat-icon-button >
-            <mat-icon class="dark-icon">menu</mat-icon>
-        </button>
-    </mat-toolbar>
-    <div class="main__space">
-        <router-outlet></router-outlet>
-    </div>
+        <button mat-stroked-button color="warn" routerLink="/login">Cerrar sesión</button>
+    </mat-toolbar-row>
+    <mat-toolbar-row fxShow fxHide.gt-xs>
+        <a class="main__link" mat-button routerLink="/main/reporteIp" routerLinkActive="nav-active">
+            Reporte X IP
+        </a>
+        <a class="main__link" mat-button routerLink="/main/reporte_dia" routerLinkActive="nav-active">
+            Reporte diario
+        </a>
+        <a class="main__link" mat-button routerLink="/main/reporte_mes" routerLinkActive="nav-active">
+            Reporte Mensual
+        </a>
+    </mat-toolbar-row>
+
+</mat-toolbar>
+<div class="main__space">
+    <router-outlet></router-outlet>
 </div>

@@ -10,6 +10,18 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule)
+      },
+      {
+        path: 'reporteIp',
+        loadChildren: () => import('./report-ip/report-ip.module').then(mod => mod.ReportIpModule)
+      },
+      {
+        path: 'reporte_dia',
+        loadChildren: () => import('./report-day/report-day.module').then(mod => mod.ReportDayModule)
+      },
+      {
+        path: 'reporte_mes',
+        loadChildren: () => import('./report-month/report-month.module').then(mod => mod.ReportMonthModule)
       }
     ]
   }

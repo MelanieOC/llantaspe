@@ -11,6 +11,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
+/*import { ReportIpComponent } from './report-ip/report-ip.component';
+import { ReportDayComponent } from './report-day/report-day.component';
+import { ReportMonthComponent } from './report-month/report-month.component';*/
 
 @NgModule({
   declarations: [MainComponent],

@@ -1,74 +1,128 @@
 <div>
     <div class="pl-xs pr-xs" style="margin: 16px 0;">
-        <div class="view" style="padding: 10px;">
-            <mat-form-field>
-                <mat-label>Desde - Hasta</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
-                    <input readonly matStartDate placeholder="dd/mm/aaaa">
-                    <input readonly matEndDate placeholder="dd/mm/aaaa">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
+        <div class="view">
+            <div class="title" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <div>
+                    Fecha seleccionada:
+                </div>
+                <button mat-button (click)="generateExcel()" [disabled]="!loadPie || !loadBar" type="button">
+                    Descargar
+                </button>
+            </div>
+            <div style="padding-top: 10px;">
+                <form [formGroup]="reportForm">
+                    <div fxLayout="row wrap" fxLayoutAlign="start end">
+
+                        <mat-form-field class="pl-xs pr-xs" fxFlex="60" fxFlex.gt-sm="40">
+                            <mat-label>Desde - Hasta</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input readonly matStartDate formControlName="from" placeholder="dd/mm/aaaa">
+                                <input readonly matEndDate formControlName="to" placeholder="dd/mm/aaaa">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                        <div class="pl-xs pr-xs" fxFlex="30" fxFlex.gt-sm="20">
+                            <button mat-raised-button color="primary" [disabled]="formSubmitAttempt" type="button"
+                                style="margin-bottom: 16px;" (click)="onSubmit()">
+                                Buscar
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-bottom: 16px;">
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
         <div class="pl-xs pr-xs" fxFlex="100">
-            <div class="view">
-                <div class="title">
-                    Las 20 medidas más consultadas en llantas.pe
+            <div class="view h-400px pad" id="graph1">
+                <div>
+                    <h4 style="text-align: center;margin-bottom: 0;"> Las 20 medidas más consultadas en llantas.pe</h4>
+                    <h5 style="text-align: center;">Desde {{initDate | date:'dd-MM-yyy'}} - Hasta {{endDate |
+                        date:'dd-MM-yyy'}}</h5>
                 </div>
-                <div style="padding: 10px;">
-                    <app-pie-chart></app-pie-chart>
+                <div *ngIf="loadPie;else loading">
+                    <app-pie-chart *ngIf="dataPie.length;else noData" [data]="dataPie"></app-pie-chart>
                 </div>
+
             </div>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-bottom: 16px;">
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
 
-        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="view">
-                <div class="title">
-                    Las 10 Ips que más consultan en llantas.pe
+        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-sm="50">
+            <div class="view pad" id="graph2">
+                <div>
+                    <h4 style="text-align: center;margin-bottom: 0;">Las 10 Ips que más consultan en llantas.pe</h4>
+                    <h5 style="text-align: center;">Desde {{initDate | date:'dd-MM-yyy'}} - Hasta {{endDate |
+                        date:'dd-MM-yyy'}}</h5>
                 </div>
-                <div style="padding: 10px;">
-                    <app-bar-chart></app-bar-chart>
+                <div *ngIf="loadBar;else loading">
+                    <app-bar-chart *ngIf="dataBar.length;else noData" [init]="initDate" [end]="endDate"
+                        [data]="dataBar"></app-bar-chart>
                 </div>
+
             </div>
-            
+
         </div>
-        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="view"> 
-                <div class="title">
-                    Ranking de paises que más consultan en llantas.pe
+        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-sm="50">
+            <div class="view pad" id="graph3">
+
+                <div>
+                    <h4 style="text-align: center;margin-bottom: 0;">Ranking de paises que más consultan en llantas.pe
+                    </h4>
+                    <h5 style="text-align: center;">Desde {{initDate | date:'dd-MM-yyy'}} - Hasta {{endDate |
+                        date:'dd-MM-yyy'}}</h5>
                 </div>
-                <div style="padding: 10px;">
-                    <app-country-chart></app-country-chart>
+                <div *ngIf="loadCountry;else loading">
+                    <app-country-chart *ngIf="dataCountry.length;else noData" [data]="dataCountry"></app-country-chart>
                 </div>
+
             </div>
         </div>
     </div>
-    <div fxLayout="row wrap " fxLayoutAlign="center center" style="margin-bottom: 16px;">
+    <div fxLayout="row wrap " fxLayoutAlign="center center">
 
-        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="view">
-                <div class="title">
-                    Dispositivos más usados
+        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-sm="50">
+            <div class="view h-400px pad" id="graph4">
+                <div>
+                    <h4 style="text-align: center;margin-bottom: 0;">Dispositivos más usados</h4>
+                    <h5 style="text-align: center;">Desde {{initDate | date:'dd-MM-yyy'}} - Hasta {{endDate |
+                        date:'dd-MM-yyy'}}</h5>
                 </div>
-                <div style="padding: 10px;">
-                    <app-media-chart></app-media-chart>
+                <div *ngIf="loadMedia;else loading">
+                    <app-media-chart *ngIf="dataMedia.length;else noData" [data]="dataMedia"></app-media-chart>
+                </div>
+
+            </div>
+        </div>
+        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-sm="50">
+            <div class="view h-400px pad" id="graph5">
+                <div>
+                    <h4 style="text-align: center;margin-bottom: 0;">Medidas buscadas por los usuarios</h4>
+                    <h5 style="text-align: center;">Desde {{initDate | date:'dd-MM-yyy'}} - Hasta {{endDate |
+                        date:'dd-MM-yyy'}}</h5>
+                </div>
+                <div *ngIf="loadWord;else loading" style="padding: 10px;">
+                    <app-words-chart *ngIf="dataWords.length;else noData" [data]="dataWords"></app-words-chart>
                 </div>
             </div>
         </div>
-        <div class="pl-xs pr-xs" fxFlex="100" fxFlex.gt-xs="50">
-            <div class="view">
-                <div class="title">
-                    Medidas buscadas por los usuarios
-                </div>
-                <div style="padding: 10px;">
-                    <app-words-chart></app-words-chart>
+        <ng-template #loading>
+            <div fxLayout="row wrap" fxLayoutAlign="center center" class="h-300px">
+                <mat-spinner></mat-spinner>
+            </div>
+
+        </ng-template>
+        <ng-template #noData>
+            <div fxLayout="row wrap" fxLayoutAlign="center center" class="h-300px">
+                <div style="text-align: center;">
+                    Sin Resultados
                 </div>
             </div>
-        </div>
+
+        </ng-template>
     </div>
 </div>

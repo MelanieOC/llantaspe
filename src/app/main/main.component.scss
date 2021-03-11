@@ -2,23 +2,39 @@
     &__toolbar {
         background-color: rgb(51, 51, 51);
         color: #fff;
+        position: fixed;
+        top: 0;
+        z-index: 200;
     }
-    &__space{
+    &__space {
         overflow: auto;
-        height: calc(100vh - 64px);
+        margin-top: 70px;
+        //height: calc(100vh - 64px);
+    }
+    &__link {
+        color: rgba(255, 255, 255, 0.5);
     }
 }
 
+.nav-active {
+    color: white;
+    font-weight: bold;
+}
+
 .img-logo {
-    width: 100px;
+    height: 45px;
     border-radius: 10px;
     filter: brightness(50000%);
 }
 
-@media(max-width:599px){
+@media (max-width: 599px) {
     .main {
-        &__space{
-            height: calc(100vh - 56px);
+        &__space {
+            //height: calc(100vh - 56px);
+            margin-top: 100px;
+        }
+        &__link {
+            font-size: 13px;
         }
     }
 }

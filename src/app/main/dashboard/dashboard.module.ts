@@ -16,13 +16,22 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartsModule } from 'ng2-charts';
+import { TagCloudModule } from 'angular-tag-cloud-module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TableResponsiveModule } from '../table-responsive/table-responsive.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CountryChartComponent } from './country-chart/country-chart.component';
 import { MediaChartComponent } from './media-chart/media-chart.component';
 import { WordsChartComponent } from './words-chart/words-chart.component';
+import { ModalBarComponent } from './modal-bar/modal-bar.component';
 
+import { NgxEchartsModule } from 'ngx-echarts';
+
+import * as echarts from 'echarts';
 
 
 @NgModule({
@@ -32,7 +41,8 @@ import { WordsChartComponent } from './words-chart/words-chart.component';
     BarChartComponent,
     CountryChartComponent,
     MediaChartComponent,
-    WordsChartComponent
+    WordsChartComponent,
+    ModalBarComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +59,13 @@ import { WordsChartComponent } from './words-chart/words-chart.component';
     FlexLayoutModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ChartsModule,
+    TagCloudModule,
+    TableResponsiveModule,
+    MatDialogModule,
+    NgxEchartsModule.forRoot({ echarts }),
+    MatProgressSpinnerModule
   ]
 })
 export class DashboardModule { }
