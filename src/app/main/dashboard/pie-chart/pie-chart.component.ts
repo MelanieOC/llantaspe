@@ -13,13 +13,13 @@ import { MediaqueryService } from 'src/app/services/mediaquery.service';
 export class PieChartComponent implements OnInit {
   @Input() public data: any[];
   colors = ['#008148', '#C6C013', '#EF8A17', '#DDE8B9', '#E8D2AE', '#D7B29D', '#CB8589', '#ECBA82', '#81C14B', '#B084CC', '#D7CDCC', '#9C528B', '#E952DE', '#6369D1', '#60E1E0']
- 
+
   public mediaService = new MediaqueryService('(min-width: 760px)');
   isDesktop: boolean;
 
-  chartOption: EChartsOption 
+  chartOption: EChartsOption
 
-  active = [{name: "Otros", value: 2574, label: "Otros"}]
+  active = [{ name: "Otros", value: 2574, label: "Otros" }]
   constructor() { }
 
   ngOnInit(): void {
@@ -41,7 +41,9 @@ export class PieChartComponent implements OnInit {
         {
           name: 'Medidas',
           type: 'pie',
-          radius: '50%',
+          radius: '70%',
+          center: ['50%', '50%'],
+          selectedMode: 'single',
           data: this.data,
           label: {
             show: this.isDesktop

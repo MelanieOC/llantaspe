@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  private url: string = 'https://reporte.llantas.pe';
-
+  //private url: string = 'https://www.llantas.pe/reporte';
+  private url: string = environment.url;
   constructor(
     private http: HttpClient
   ) { }

@@ -25,6 +25,12 @@ export class CountryChartComponent implements OnInit {
           }
         }
       },
+      grid: {
+        top: '1%',
+        left: '1%',
+        right: '1%',
+        containLabel: true
+      },
       toolbox: {
         show: true,
         feature: {
@@ -48,7 +54,13 @@ export class CountryChartComponent implements OnInit {
         data: this.data.map(el => el.name),
         axisLabel: {
           formatter: function (value) {
-            return '{' + value + '| }\n{value|' + value + '}';
+            let two=value.split(' ')
+            if(two.length>1){
+              return '{' + two.join('') + '| }\n{value|' + value + '}';
+            }else{
+              return '{' + value + '| }\n{value|' + value + '}';
+            }
+            
           },
           rich: this.getFlags(list)
         }
@@ -79,7 +91,7 @@ export class CountryChartComponent implements OnInit {
     }
     list.forEach(ct => {
       let nm = ct.toLowerCase().trim().replace(' ', '-')
-      rit[ct] = {
+      rit[ct.replace(' ', '')] = {
         height: 20,
         align: 'center',
         backgroundColor: {

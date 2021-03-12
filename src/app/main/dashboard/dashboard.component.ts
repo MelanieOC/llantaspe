@@ -71,7 +71,6 @@ export class DashboardComponent implements OnInit {
     let year = today.getFullYear()
     let day = today.getDate()
     this.initDate = day < 15 ? new Date(year, month, 1) : new Date(year, month, 1)
-    this.endDate = today
 
     this.reportForm.get('from').setValue(this.initDate)
     this.reportForm.get('to').setValue(today)
@@ -92,6 +91,8 @@ export class DashboardComponent implements OnInit {
     this.loadBar = false
     this.loadCountry = false
     let report = this.reportForm.value
+    this.initDate = report['from']
+    this.endDate = report['to']
 
     const formData = new FormData();
     formData.append('key', 'llantas.pe');
@@ -101,7 +102,7 @@ export class DashboardComponent implements OnInit {
       this.dataWords = resultArray.map(wd => {
         return {
           text: wd.medida,
-          weight: wd.total,
+          weight: wd.total > 2 ? wd.total - 1 : wd.total,
           tooltip: wd.medida + ' ' + wd.total
         }
       })
@@ -117,7 +118,6 @@ export class DashboardComponent implements OnInit {
     formData2.append('fecha_fin', this.getDateFormat(report['to']));
 
     this.dbs.getDataMesuare(formData2).subscribe(resp => {
-      console.log('measure')
       let resultArray = Object.keys(resp).map(dt => resp[dt]);
       this.dataMeasures = resultArray.map(md => {
         return {
@@ -270,55 +270,55 @@ export class DashboardComponent implements OnInit {
     }
 
     //Segundo
-   if(this.dataBar.length){
-    header.push({ name: 'ID', width: 10, sheet: 1 })
-    header.push({ name: 'MEDIDA', width: 20, sheet: 1 })
-    header.push({ name: 'VISITAS', width: 20, sheet: 1 })
+    if (this.dataBar.length) {
+      header.push({ name: 'ID', width: 10, sheet: 1 })
+      header.push({ name: 'MEDIDA', width: 20, sheet: 1 })
+      header.push({ name: 'VISITAS', width: 20, sheet: 1 })
 
-    this.dataBar.forEach((rc, ind) => {
-      let data = [ind + 1, rc.name, rc.value]
-      rows.push({ rowData: data, sheet: 1 })
-    })
-   }
+      this.dataBar.forEach((rc, ind) => {
+        let data = [ind + 1, rc.name, rc.value]
+        rows.push({ rowData: data, sheet: 1 })
+      })
+    }
 
     //Tercero
-    if(this.dataCountry.length){
+    if (this.dataCountry.length) {
       header.push({ name: 'ID', width: 10, sheet: 2 })
       header.push({ name: 'PAÍS', width: 20, sheet: 2 })
       header.push({ name: 'VISITAS', width: 20, sheet: 2 })
-  
+
       this.dataCountry.forEach((rc, ind) => {
         let data = [ind + 1, rc.name, rc.value]
         rows.push({ rowData: data, sheet: 2 })
       })
     }
-    
+
 
     //Cuarto
-    if(this.dataMedia.length){
+    if (this.dataMedia.length) {
       header.push({ name: 'ID', width: 10, sheet: 3 })
       header.push({ name: 'DISPOSITIVOS', width: 20, sheet: 3 })
       header.push({ name: 'VISITAS', width: 20, sheet: 3 })
-  
+
       this.dataMedia.forEach((rc, ind) => {
         let data = [ind + 1, rc.name, rc.value]
         rows.push({ rowData: data, sheet: 3 })
       })
     }
-    
+
 
     //Quinto
-    if(this.dataWords.length){
+    if (this.dataWords.length) {
       header.push({ name: 'ID', width: 10, sheet: 4 })
       header.push({ name: 'MEDIDA', width: 20, sheet: 4 })
       header.push({ name: 'BUSCADO', width: 20, sheet: 4 })
-  
+
       this.dataWords.forEach((rc, ind) => {
         let data = [ind + 1, rc.text, rc.weight]
         rows.push({ rowData: data, sheet: 4 })
       })
     }
-    
+
 
     let sendData = {
       data: rows

@@ -42,6 +42,12 @@ export class BarChartComponent implements OnInit {
           }
         }
       },
+      grid: {
+        top: '1%',
+        left: '1%',
+        right: '1%',
+        containLabel: true
+      },
       toolbox: {
         show: this.isDesktop,
         feature: {
